@@ -46,6 +46,21 @@ void addContact()
 	cout << "연락처를 성공적으로 추가하였습니다!\n";
 }
 
+// 전체 연락처 출력
+void viewAllContacts()
+{
+	cout << "전체 연락처 목록:\n";
+	for (const auto &contact : contactList)
+	{
+		cout << "이름: " << contact.name << "\n";
+		cout << "전화번호: " << contact.phoneNumber << "\n";
+		cout << "이메일: " << contact.email << "\n";
+		cout << "주소: " << contact.address << "\n";
+		cout << "그룹: " << contact.group << "\n"; // 그룹 출력 추가
+		cout << "-------------------\n";
+	}
+}
+
 int main()
 {
 	int choice;
@@ -82,7 +97,7 @@ int main()
 			cout << "5. 연락처 삭제\n";
 			break;
 		case 6:
-			cout << "6. 전체 연락처 보기\n";
+			viewAllContacts();
 			break;
 		case 7:
 			cout << "연락처를 종료합니다. 좋은 하루 되세요!\n";
