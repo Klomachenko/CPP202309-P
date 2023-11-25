@@ -51,7 +51,9 @@ void addContact()
 // 전체 연락처 출력
 void viewAllContacts()
 {
-	cout << "전체 연락처 목록:\n";
+	cout << "-------------------\n";
+
+	cout << "==== 전체 연락처 목록 ====\n";
 	for (const auto &contact : contactList)
 	{
 		cout << "이름: " << contact.name << "\n";
@@ -66,6 +68,8 @@ void viewAllContacts()
 // 연락처 수정
 void modifyContact()
 {
+	cout << "-------------------\n";
+
 	cout << "수정할 연락처의 이름을 입력하세요:\n";
 	string name;
 	getline(cin, name);
@@ -114,6 +118,31 @@ void modifyContact()
 	}
 }
 
+// 연락처 삭제
+void deleteContact()
+{
+	cout << "-------------------\n";
+
+	cout << "삭제할 연락처의 이름을 입력하세요:\n";
+	string name;
+	getline(cin, name);
+
+	// 이름으로 연락처 찾기
+	auto it = find_if(contactList.begin(), contactList.end(), [name](const Contact &contact)
+					  { return contact.name == name; });
+
+	if (it != contactList.end())
+	{
+		// 연락처 삭제
+		contactList.erase(it);
+		cout << "연락처를 성공적으로 삭제하였습니다!\n";
+	}
+	else
+	{
+		cout << "해당하는 이름의 연락처가 없습니다.\n";
+	}
+}
+
 int main()
 {
 	int choice;
@@ -150,7 +179,8 @@ int main()
 			modifyContact();
 			break;
 		case 5:
-			cout << "5. 연락처 삭제\n";
+			cout << "5. 연락처 삭제하기를 선택하셨습니다.\n";
+			deleteContact();
 			break;
 		case 6:
 			cout << "전체 연락처 보기를 선택하셨습니다.\n";
