@@ -61,6 +61,47 @@ void viewAllContacts()
 	}
 }
 
+// 연락처 수정
+void modifyContact()
+{
+	cout << "수정할 연락처의 이름을 입력하세요:\n";
+	string name;
+	getline(cin, name);
+
+	// 이름으로 연락처 찾기
+	auto it = find_if(contactList.begin(), contactList.end(), [name](const Contact &contact)
+					  { return contact.name == name; });
+
+	if (it != contactList.end())
+	{
+		cout << "새로운 연락처 정보를 입력하세요:\n";
+
+		// 필수 필드 입력
+		cout << "이름 (필수): ";
+		getline(cin, it->name);
+
+		cout << "전화번호 (필수): ";
+		getline(cin, it->phoneNumber);
+
+		// 추가 정보 입력
+		cout << "이메일: ";
+		getline(cin, it->email);
+
+		cout << "주소: ";
+		getline(cin, it->address);
+
+		// 그룹 입력
+		cout << "그룹: ";
+		getline(cin, it->group);
+
+		cout << "연락처를 성공적으로 수정하였습니다!\n";
+	}
+	else
+	{
+		cout << "해당하는 이름의 연락처가 없습니다.\n";
+	}
+}
+
 int main()
 {
 	int choice;
@@ -91,7 +132,7 @@ int main()
 			cout << "3. 연락처 검색\n";
 			break;
 		case 4:
-			cout << "4. 연락처 수정\n";
+			modifyContact();
 			break;
 		case 5:
 			cout << "5. 연락처 삭제\n";
