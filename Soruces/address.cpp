@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <vector>
 using namespace std;
 
 struct Contact
@@ -10,6 +11,40 @@ struct Contact
 	string address;
 	string group;
 };
+
+// 전역 연락처 목록
+std::vector<Contact> contactList;
+
+// 주소록에 연락처 추가
+void addContact()
+{
+	cout << "연락처 정보를 입력하세요:\n";
+
+	Contact newContact;
+
+	// 필수 필드 입력
+	cout << "이름 (필수): ";
+	getline(cin, newContact.name);
+
+	cout << "전화번호 (필수): ";
+	getline(cin, newContact.phoneNumber);
+
+	// 추가 정보 입력
+	cout << "이메일: ";
+	getline(cin, newContact.email);
+
+	cout << "주소: ";
+	getline(cin, newContact.address);
+
+	// 그룹 입력
+	cout << "그룹: ";
+	getline(cin, newContact.group);
+
+	// 연락처 추가
+	contactList.push_back(newContact);
+
+	std::cout << "연락처를 성공적으로 추가하였습니다!\n";
+}
 
 int main()
 {
@@ -32,7 +67,7 @@ int main()
 		switch (choice)
 		{
 		case 1:
-			cout << "1. 연락처 추가\n";
+			addContact();
 			break;
 		case 2:
 			cout << "2. 그룹 생성\n";
