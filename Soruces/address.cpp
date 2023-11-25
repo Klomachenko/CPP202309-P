@@ -18,6 +18,8 @@ std::vector<Contact> contactList;
 // 주소록에 연락처 추가
 void addContact()
 {
+	cout << "-------------------\n";
+
 	cout << "연락처 정보를 입력하세요:\n";
 
 	Contact newContact;
@@ -95,6 +97,16 @@ void modifyContact()
 		getline(cin, it->group);
 
 		cout << "연락처를 성공적으로 수정하였습니다!\n";
+		cout << "-------------------\n";
+
+		// 수정된 연락처 정보 출력
+		cout << "수정된 연락처 정보:\n";
+		cout << "이름: " << it->name << "\n";
+		cout << "전화번호: " << it->phoneNumber << "\n";
+		cout << "이메일: " << it->email << "\n";
+		cout << "주소: " << it->address << "\n";
+		cout << "그룹: " << it->group << "\n";
+		cout << "-------------------\n";
 	}
 	else
 	{
@@ -116,6 +128,7 @@ int main()
 		cout << "5. 연락처 삭제\n";
 		cout << "6. 전체 연락처 보기\n";
 		cout << "7. 나가기\n";
+		cout << "-------------------\n";
 		cout << "원하시는 기능의 번호를 입력하세요: ";
 		cin >> choice;
 		cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -123,6 +136,7 @@ int main()
 		switch (choice)
 		{
 		case 1:
+			cout << "연락처 추가하기를 선택하셨습니다.\n";
 			addContact();
 			break;
 		case 2:
@@ -132,12 +146,14 @@ int main()
 			cout << "3. 연락처 검색\n";
 			break;
 		case 4:
+			cout << "연락처 수정하기를 선택하셨습니다.\n";
 			modifyContact();
 			break;
 		case 5:
 			cout << "5. 연락처 삭제\n";
 			break;
 		case 6:
+			cout << "전체 연락처 보기를 선택하셨습니다.\n";
 			viewAllContacts();
 			break;
 		case 7:
