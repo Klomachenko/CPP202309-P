@@ -143,6 +143,45 @@ void deleteContact()
 	}
 }
 
+// 연락처 검색
+void searchContact()
+{
+	cout << "어떤것으로 검색을 하실지 선택하세요:\n";
+	cout << "1. 이름\n";
+	cout << "2. 전화번호\n";
+	cout << "4. 주소\n";
+	cout << "5. 그룹\n"; // 그룹 검색 옵션 추가
+	cout << "번호를 입력하세요: ";
+
+	int searchOption;
+	cin >> searchOption;
+	cin.ignore(numeric_limits<streamsize>::max(), '\n'); // 버퍼 비우기
+
+	string searchCriteria;
+	cout << "검색어를 입력하세요: ";
+	getline(cin, searchCriteria);
+
+	cout << "Search Results:\n";
+
+	switch (searchOption)
+	{
+	case 1:
+		cout << "이름으로 검색\n";
+		break;
+	case 2:
+		cout << "전화번호로 검색\n";
+		break;
+	case 3:
+		cout << "주소로 검색\n";
+		break;
+	case 4:
+		cout << "그룹으로 검색\n";
+		break;
+	default:
+		cout << "올바르지 않은 선택입니다.\n";
+	}
+}
+
 int main()
 {
 	int choice;
@@ -172,7 +211,8 @@ int main()
 			cout << "2. 그룹 생성\n";
 			break;
 		case 3:
-			cout << "3. 연락처 검색\n";
+			cout << "3. 연락처 검색을 선택하셨습니다\n";
+			searchContact();
 			break;
 		case 4:
 			cout << "연락처 수정하기를 선택하셨습니다.\n";
