@@ -43,7 +43,7 @@ void addContact()
 	// 연락처 추가
 	contactList.push_back(newContact);
 
-	std::cout << "연락처를 성공적으로 추가하였습니다!\n";
+	cout << "연락처를 성공적으로 추가하였습니다!\n";
 }
 
 int main()
