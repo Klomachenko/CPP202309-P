@@ -8,6 +8,7 @@ struct Contact
 	string phoneNumber;
 	string email;
 	string address;
+	string group;
 };
 
 int main()
