@@ -13,7 +13,10 @@ struct Contact
 };
 
 // 전역 연락처 목록
-std::vector<Contact> contactList;
+vector<Contact> contactList;
+
+// 함수 선언
+void partialSearchByName(const string &partialQuery);
 
 // 주소록에 연락처 추가
 void addContact()
@@ -166,7 +169,8 @@ void searchContact()
 	switch (searchOption)
 	{
 	case 1:
-		cout << "이름으로 검색\n";
+		cout << "이름을 입력해주세요.\n";
+		partialSearchByName(searchCriteria);
 		break;
 	case 2:
 		cout << "전화번호로 검색\n";
@@ -179,6 +183,39 @@ void searchContact()
 		break;
 	default:
 		cout << "올바르지 않은 선택입니다.\n";
+	}
+}
+
+// 이름으로 검색 (부분 검색)
+void partialSearchByName(const string &partialQuery)
+{
+	vector<Contact> matchingContacts;
+
+	for (const auto &contact : contactList)
+	{
+		// 이름에서 부분 문자열이 일치하는 경우를 찾음
+		if (contact.name.find(partialQuery) != string::npos)
+		{
+			matchingContacts.push_back(contact);
+		}
+	}
+
+	if (matchingContacts.empty())
+	{
+		cout << "검색 결과가 없습니다.\n";
+	}
+	else
+	{
+		cout << "검색된 연락처 목록:\n";
+		for (const auto &matchingContact : matchingContacts)
+		{
+			cout << "-------------------\n";
+			cout << "이름: " << matchingContact.name << "\n";
+			cout << "전화번호: " << matchingContact.phoneNumber << "\n";
+			cout << "이메일: " << matchingContact.email << "\n";
+			cout << "주소: " << matchingContact.address << "\n";
+			cout << "그룹: " << matchingContact.group << "\n";
+		}
 	}
 }
 
