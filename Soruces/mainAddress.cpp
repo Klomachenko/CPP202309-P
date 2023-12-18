@@ -249,7 +249,20 @@ void searchContact()
 		cout << "주소로 검색\n";
 		break;
 	case 5:
+		// 그룹으로 검색
 		cout << "그룹으로 검색\n";
+		for (const auto &contact : contactList)
+		{
+			if (contact.group == searchCriteria)
+			{
+				cout << "-------------------\n";
+				cout << "이름: " << contact.name << "\n";
+				cout << "전화번호: " << contact.phoneNumber << "\n";
+				cout << "이메일: " << contact.email << "\n";
+				cout << "주소: " << contact.address << "\n";
+				cout << "그룹: " << contact.group << "\n";
+			}
+		}
 		break;
 	default:
 		cout << "올바르지 않은 선택입니다.\n";
@@ -294,6 +307,9 @@ int main()
 	loadContactsFromFile("contacts.txt");
 
 	int choice;
+	string newGroup;
+
+	auto groupIt = groupList.end();
 
 	while (true)
 	{
@@ -318,6 +334,18 @@ int main()
 			break;
 		case 2:
 			cout << "2. 그룹 생성\n";
+			cout << "생성할 그룹의 이름을 입력하세요: ";
+			getline(cin, newGroup);
+			groupIt = find(groupList.begin(), groupList.end(), newGroup);
+			if (groupIt == groupList.end())
+			{
+				groupList.push_back(newGroup);
+				cout << "그룹을 성공적으로 생성하였습니다!\n";
+			}
+			else
+			{
+				cout << "이미 존재하는 그룹입니다.\n";
+			}
 			break;
 		case 3:
 			cout << "3. 연락처 검색을 선택하셨습니다\n";
