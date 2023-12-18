@@ -21,6 +21,7 @@ vector<Contact> contactList;
 void partialSearchByName(const string &partialQuery);
 void saveContactsToFile(const string &fileName);
 void loadContactsFromFile(const string &fileName);
+void viewContactsByGroup();
 
 // 그룹 목록
 vector<string> groupList;
@@ -128,6 +129,7 @@ void viewAllContacts()
 		cout << "그룹: " << contact.group << "\n"; // 그룹 출력 추가
 		cout << "-------------------\n";
 	}
+	viewContactsByGroup();
 }
 
 // 연락처 수정
