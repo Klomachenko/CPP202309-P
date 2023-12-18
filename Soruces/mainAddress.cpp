@@ -114,24 +114,6 @@ void loadContactsFromFile(const string &fileName)
 	inFile.close();
 }
 
-// 전체 연락처 출력
-void viewAllContacts()
-{
-	cout << "-------------------\n";
-
-	cout << "==== 전체 연락처 목록 ====\n";
-	for (const auto &contact : contactList)
-	{
-		cout << "이름: " << contact.name << "\n";
-		cout << "전화번호: " << contact.phoneNumber << "\n";
-		cout << "이메일: " << contact.email << "\n";
-		cout << "주소: " << contact.address << "\n";
-		cout << "그룹: " << contact.group << "\n"; // 그룹 출력 추가
-		cout << "-------------------\n";
-	}
-	viewContactsByGroup();
-}
-
 // 연락처 수정
 void modifyContact()
 {
@@ -304,40 +286,63 @@ void partialSearchByName(const string &partialQuery)
 	}
 }
 
+// 그룹 목록 초기화 또는 추가
+void initializeGroups()
+{
+    // 그룹이 이미 초기화되었는지 확인
+    if (groupList.empty())
+    {
+        // 그룹을 추가하려면 아래와 같이 작성
+        groupList.push_back("Friends");
+        groupList.push_back("Family");
+        groupList.push_back("Colleagues");
+    }
+}
+
 // 그룹별 연락처 정렬 및 출력
 void viewContactsByGroup()
 {
-	cout << "-------------------\n";
+    cout << "-------------------\n";
 
-	for (const auto &groupName : groupList)
-	{
-		cout << "==== " << groupName << " 그룹 ====\n";
+    // 그룹 이름 출력
+    for (const auto &groupName : groupList)
+    {
+        cout << "==== " << groupName << " 그룹 ====\n";
 
-		// 현재 그룹에 속하는 연락처 추출
-		vector<Contact> groupContacts;
-		for (const auto &contact : contactList)
-		{
-			if (contact.group == groupName)
-			{
-				groupContacts.push_back(contact);
-			}
-		}
+        // 현재 그룹에 속하는 연락처 추출
+        vector<Contact> groupContacts;
+        for (const auto &contact : contactList)
+        {
+            if (contact.group == groupName)
+            {
+                groupContacts.push_back(contact);
+            }
+        }
 
-		// 연락처를 이름으로 정렬
-		sort(groupContacts.begin(), groupContacts.end(), [](const Contact &a, const Contact &b)
-				 { return a.name < b.name; });
+        // 정렬된 연락처의 이름만 출력
+        for (const auto &contact : groupContacts)
+        {
+            cout << "이름: " << contact.name << "\n";
+        }
+        cout << "-------------------\n";
+    }
+}
 
-		// 정렬된 연락처 출력
-		for (const auto &contact : groupContacts)
-		{
-			cout << "이름: " << contact.name << "\n";
-			cout << "전화번호: " << contact.phoneNumber << "\n";
-			cout << "이메일: " << contact.email << "\n";
-			cout << "주소: " << contact.address << "\n";
-			cout << "그룹: " << contact.group << "\n";
-			cout << "-------------------\n";
-		}
-	}
+// 전체 연락처 출력
+void viewAllContacts()
+{
+    cout << "-------------------\n";
+
+    cout << "==== 전체 연락처 목록 ====\n";
+    for (const auto &contact : contactList)
+    {
+        cout << "이름: " << contact.name << "\n";
+        cout << "전화번호: " << contact.phoneNumber << "\n";
+        cout << "이메일: " << contact.email << "\n";
+        cout << "주소: " << contact.address << "\n";
+        cout << "그룹: " << contact.group << "\n"; // 그룹 출력 추가
+        cout << "-------------------\n";
+    }
 }
 
 int main()
@@ -351,9 +356,12 @@ int main()
 
 	while (true)
 	{
+
+		viewContactsByGroup();
+
 		cout << "\n===== 연락처 관리 시스템 =====\n";
 		cout << "1. 연락처 추가\n";
-		cout << "2. 그룹 생성\n";
+		cout << "2. 그룹별 보기\n";
 		cout << "3. 연락처 검색\n";
 		cout << "4. 연락처 수정\n";
 		cout << "5. 연락처 삭제\n";
@@ -371,19 +379,8 @@ int main()
 			addContact();
 			break;
 		case 2:
-			cout << "2. 그룹 생성\n";
-			cout << "생성할 그룹의 이름을 입력하세요: ";
-			getline(cin, newGroup);
-			groupIt = find(groupList.begin(), groupList.end(), newGroup);
-			if (groupIt == groupList.end())
-			{
-				groupList.push_back(newGroup);
-				cout << "그룹을 성공적으로 생성하였습니다!\n";
-			}
-			else
-			{
-				cout << "이미 존재하는 그룹입니다.\n";
-			}
+			cout << "2. 그룹별 보기를 선택하셨습니다.\n";
+			viewContactsByGroup();
 			break;
 		case 3:
 			cout << "3. 연락처 검색을 선택하셨습니다\n";
