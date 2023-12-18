@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <sstream>
 #include <string>
 #include <vector>
 using namespace std;
@@ -287,6 +288,8 @@ void partialSearchByName(const string &partialQuery)
 
 int main()
 {
+	loadContactsFromFile("contacts.txt");
+
 	int choice;
 
 	while (true)
@@ -330,6 +333,7 @@ int main()
 			viewAllContacts();
 			break;
 		case 7:
+			saveContactsToFile("contacts.txt");
 			cout << "연락처를 종료합니다. 좋은 하루 되세요!\n";
 			return 0;
 		default:
