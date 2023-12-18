@@ -18,6 +18,8 @@ vector<Contact> contactList;
 
 // 함수 선언
 void partialSearchByName(const string &partialQuery);
+void saveContactsToFile(const string &fileName);
+void loadContactsFromFile(const string &fileName);
 
 // 주소록에 연락처 추가
 void addContact()
@@ -212,8 +214,9 @@ void searchContact()
 	cout << "어떤것으로 검색을 하실지 선택하세요:\n";
 	cout << "1. 이름\n";
 	cout << "2. 전화번호\n";
+	cout << "3. 이메일\n";
 	cout << "4. 주소\n";
-	cout << "5. 그룹\n"; // 그룹 검색 옵션 추가
+	cout << "5. 그룹\n";
 	cout << "번호를 입력하세요: ";
 
 	int searchOption;
@@ -236,9 +239,12 @@ void searchContact()
 		cout << "전화번호로 검색\n";
 		break;
 	case 3:
-		cout << "주소로 검색\n";
+		cout << "이메일로 검색\n";
 		break;
 	case 4:
+		cout << "주소로 검색\n";
+		break;
+	case 5:
 		cout << "그룹으로 검색\n";
 		break;
 	default:
