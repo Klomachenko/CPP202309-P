@@ -197,6 +197,8 @@ void deleteContact()
 		// 연락처 삭제
 		contactList.erase(it);
 		cout << "연락처를 성공적으로 삭제하였습니다!\n";
+
+		saveContactsToFile("contacts.txt");
 	}
 	else
 	{
