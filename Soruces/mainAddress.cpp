@@ -170,6 +170,8 @@ void modifyContact()
 		cout << "주소: " << it->address << "\n";
 		cout << "그룹: " << it->group << "\n";
 		cout << "-------------------\n";
+
+		saveContactsToFile("contacts.txt");
 	}
 	else
 	{
