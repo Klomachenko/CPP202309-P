@@ -74,6 +74,39 @@ void saveContactsToFile(const string &fileName)
 	outFile.close();
 }
 
+// 파일에서 전체 연락처 읽어오기
+void loadContactsFromFile(const string &fileName)
+{
+	ifstream inFile(fileName);
+	if (!inFile.is_open())
+	{
+		cerr << "Warning: Could not open the file " << fileName << " for reading." << endl;
+		return;
+	}
+
+	contactList.clear(); // 기존 주소록 데이터를 비움
+
+	string line;
+	while (getline(inFile, line))
+	{
+		stringstream ss(line);
+		string token;
+		Contact newContact;
+
+		// CSV 파일에서 각 필드를 읽어와 구조체에 저장
+		getline(ss, newContact.name, ',');
+		getline(ss, newContact.phoneNumber, ',');
+		getline(ss, newContact.email, ',');
+		getline(ss, newContact.address, ',');
+		getline(ss, newContact.group, ',');
+
+		// 구조체를 주소록에 추가
+		contactList.push_back(newContact);
+	}
+
+	inFile.close();
+}
+
 // 전체 연락처 출력
 void viewAllContacts()
 {
