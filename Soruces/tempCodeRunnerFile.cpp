@@ -1,16 +1,21 @@
-// tempCodeRunnerFile.cpp
-void viewAllContacts()
+// 전체 연락처 파일에 저장
+void saveContactsToFile(const string &fileName)
 {
-	cout << "-------------------\n";
+	ofstream outFile(fileName);
+	if (!outFile.is_open())
+	{
+		cerr << "Error: Could not open the file " << fileName << " for writing." << endl;
+		return;
+	}
 
-	cout << "==== 전체 연락처 목록 ====\n";
 	for (const auto &contact : contactList)
 	{
-		cout << "이름: " << contact.name << "\n";
-		cout << "전화번호: " << contact.phoneNumber << "\n";
-		cout << "이메일: " << contact.email << "\n";
-		cout << "주소: " << contact.address << "\n";
-		cout << "그룹: " << contact.group << "\n"; // 그룹 출력 추가
-		cout << "-------------------\n";
+		outFile << contact.name << ","
+						<< contact.phoneNumber << ","
+						<< contact.email << ","
+						<< contact.address << ","
+						<< contact.group << "\n";
 	}
+
+	outFile.close();
 }
