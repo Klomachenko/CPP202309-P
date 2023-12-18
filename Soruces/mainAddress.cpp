@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <string>
 #include <vector>
 using namespace std;
@@ -51,6 +52,28 @@ void addContact()
 	cout << "연락처를 성공적으로 추가하였습니다!\n";
 }
 
+// 전체 연락처 파일에 저장
+void saveContactsToFile(const string &fileName)
+{
+	ofstream outFile(fileName);
+	if (!outFile.is_open())
+	{
+		cerr << "Error: Could not open the file " << fileName << " for writing." << endl;
+		return;
+	}
+
+	for (const auto &contact : contactList)
+	{
+		outFile << contact.name << ","
+						<< contact.phoneNumber << ","
+						<< contact.email << ","
+						<< contact.address << ","
+						<< contact.group << "\n";
+	}
+
+	outFile.close();
+}
+
 // 전체 연락처 출력
 void viewAllContacts()
 {
@@ -79,7 +102,7 @@ void modifyContact()
 
 	// 이름으로 연락처 찾기
 	auto it = find_if(contactList.begin(), contactList.end(), [name](const Contact &contact)
-					  { return contact.name == name; });
+										{ return contact.name == name; });
 
 	if (it != contactList.end())
 	{
@@ -132,7 +155,7 @@ void deleteContact()
 
 	// 이름으로 연락처 찾기
 	auto it = find_if(contactList.begin(), contactList.end(), [name](const Contact &contact)
-					  { return contact.name == name; });
+										{ return contact.name == name; });
 
 	if (it != contactList.end())
 	{
