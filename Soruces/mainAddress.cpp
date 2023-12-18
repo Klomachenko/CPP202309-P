@@ -22,6 +22,9 @@ void partialSearchByName(const string &partialQuery);
 void saveContactsToFile(const string &fileName);
 void loadContactsFromFile(const string &fileName);
 
+// 그룹 목록
+vector<string> groupList;
+
 // 주소록에 연락처 추가
 void addContact()
 {
