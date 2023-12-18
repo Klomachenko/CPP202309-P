@@ -302,6 +302,42 @@ void partialSearchByName(const string &partialQuery)
 	}
 }
 
+// 그룹별 연락처 정렬 및 출력
+void viewContactsByGroup()
+{
+	cout << "-------------------\n";
+
+	for (const auto &groupName : groupList)
+	{
+		cout << "==== " << groupName << " 그룹 ====\n";
+
+		// 현재 그룹에 속하는 연락처 추출
+		vector<Contact> groupContacts;
+		for (const auto &contact : contactList)
+		{
+			if (contact.group == groupName)
+			{
+				groupContacts.push_back(contact);
+			}
+		}
+
+		// 연락처를 이름으로 정렬
+		sort(groupContacts.begin(), groupContacts.end(), [](const Contact &a, const Contact &b)
+				 { return a.name < b.name; });
+
+		// 정렬된 연락처 출력
+		for (const auto &contact : groupContacts)
+		{
+			cout << "이름: " << contact.name << "\n";
+			cout << "전화번호: " << contact.phoneNumber << "\n";
+			cout << "이메일: " << contact.email << "\n";
+			cout << "주소: " << contact.address << "\n";
+			cout << "그룹: " << contact.group << "\n";
+			cout << "-------------------\n";
+		}
+	}
+}
+
 int main()
 {
 	loadContactsFromFile("contacts.txt");
