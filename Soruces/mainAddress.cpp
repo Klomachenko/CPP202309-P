@@ -286,63 +286,50 @@ void partialSearchByName(const string &partialQuery)
 	}
 }
 
-// 그룹 목록 초기화 또는 추가
-void initializeGroups()
-{
-    // 그룹이 이미 초기화되었는지 확인
-    if (groupList.empty())
-    {
-        // 그룹을 추가하려면 아래와 같이 작성
-        groupList.push_back("Friends");
-        groupList.push_back("Family");
-        groupList.push_back("Colleagues");
-    }
-}
-
 // 그룹별 연락처 정렬 및 출력
 void viewContactsByGroup()
 {
-    cout << "-------------------\n";
+	cout << "-------------------\n";
 
-    // 그룹 이름 출력
-    for (const auto &groupName : groupList)
-    {
-        cout << "==== " << groupName << " 그룹 ====\n";
+	// 그룹 이름 출력
+	for (const auto &groupName : groupList)
+	{
+		cout << "==== " << groupName << " 그룹 ====\n";
 
-        // 현재 그룹에 속하는 연락처 추출
-        vector<Contact> groupContacts;
-        for (const auto &contact : contactList)
-        {
-            if (contact.group == groupName)
-            {
-                groupContacts.push_back(contact);
-            }
-        }
+		// 현재 그룹에 속하는 연락처 추출
+		vector<Contact> groupContacts;
+		for (const auto &contact : contactList)
+		{
+			if (contact.group == groupName)
+			{
+				groupContacts.push_back(contact);
+			}
+		}
 
-        // 정렬된 연락처의 이름만 출력
-        for (const auto &contact : groupContacts)
-        {
-            cout << "이름: " << contact.name << "\n";
-        }
-        cout << "-------------------\n";
-    }
+		// 정렬된 연락처의 이름만 출력
+		for (const auto &contact : groupContacts)
+		{
+			cout << "이름: " << contact.name << "\n";
+		}
+		cout << "-------------------\n";
+	}
 }
 
 // 전체 연락처 출력
 void viewAllContacts()
 {
-    cout << "-------------------\n";
+	cout << "-------------------\n";
 
-    cout << "==== 전체 연락처 목록 ====\n";
-    for (const auto &contact : contactList)
-    {
-        cout << "이름: " << contact.name << "\n";
-        cout << "전화번호: " << contact.phoneNumber << "\n";
-        cout << "이메일: " << contact.email << "\n";
-        cout << "주소: " << contact.address << "\n";
-        cout << "그룹: " << contact.group << "\n"; // 그룹 출력 추가
-        cout << "-------------------\n";
-    }
+	cout << "==== 전체 연락처 목록 ====\n";
+	for (const auto &contact : contactList)
+	{
+		cout << "이름: " << contact.name << "\n";
+		cout << "전화번호: " << contact.phoneNumber << "\n";
+		cout << "이메일: " << contact.email << "\n";
+		cout << "주소: " << contact.address << "\n";
+		cout << "그룹: " << contact.group << "\n"; // 그룹 출력 추가
+		cout << "-------------------\n";
+	}
 }
 
 int main()
